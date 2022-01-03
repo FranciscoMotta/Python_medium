@@ -6,14 +6,14 @@ def read():
     print(numbers)
 
 def write():
-    names = ["Julio", "Miguel", "Martin", "Juan"]
-    with open("./archivos/numbers.txt", 'w', encoding="utf-8") as file:
+    names = ["Juan", "Miguel", "Martin", "Jhon"]
+    with open("./archivos/numbers.txt", 'a', encoding="utf-8") as file:
         for name in names:
             file.write(name)
             file.write("\n")
     
 def main():
-    read()
+    # read()
     write()
 
 if __name__ == "__main__":
