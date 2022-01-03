@@ -72,38 +72,30 @@ DATA = [
 ]
 
 def main():
-    all_python_devs = [worker["name"] for worker in DATA if worker["language"] == "python"]
-    all_platzi_workers = [worker["name"] for worker in DATA if worker["organization"] == "Platzi"]
     
-    # high order func - lamnda func
+    # FUNCIONES DE FILTRO Y MAPEO
 
-    adults = list(filter(lambda worker: worker["age"] > 18 , DATA))
+    func_selec("language", "python") # Filtramos nombres de los que usen Py
+    func_selec("organization", "Platzi") # Filtramos nombres de los que trabajen con PLATZI
 
-    # MAPS
+    # USAMOS LOS LAMBDAS
 
-    adults = list(map(lambda worker: worker["name"], adults))
+    adultos = [worker['name'] for worker in DATA if worker["age"] >= 18]
+    for worker in adultos:
+        print(worker + " es mayor de edad")
 
-    # MAPS 2.0
 
-    old_people = list(map(lambda worker: worker | {"old": worker["age"] > 70}, DATA))
+# ESTA FUNCION DEVUELVE EL NOMBRE DE LAS PERSONAS QUE CUMPLAN
+# CON LA CONDICIÓN DE UNA DETERMININADA CARACTERÍSTICA
 
-    print("PYTHON DEVS")
-
-    for worker in all_python_devs:
-        print(worker)
-
-    print("///")
-    print("PLATZI WORKERS")
-    for worker in all_platzi_workers:
-        print(worker)
-    print("///")
-    print("ADULTS WORKERS")
-    for worker in adults:
-        print(worker)
-    print("///")
-    print("OLDS WORKERS")
-    for worker in old_people    :
-        print(worker)
-    print("///")
-if __name__ == '__main__':
+def func_selec (caracteristica, condicion):
+     # PYTHON DEVS - FILTER
+    python_devs = list(filter(lambda worker: worker[caracteristica] == condicion, DATA))
+    # aplicamos el map
+    python_devs = list(map(lambda worker: worker['name'], python_devs))
+    for worker in python_devs:
+        print(worker + " -> " + condicion)
+    print('________________________________________')   
+    
+if __name__ == "__main__":
     main()
